@@ -46,16 +46,18 @@ class MyForegroundService: Service() {
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentTitle("Title")
-            .setContentText("This content text").build()
+            .setContentText("This content text")
+            .build()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         log("onStartCommand")
         coroutineScope.launch {
-            for(i in 0 until 10){
+            for(i in 0 until 3){
                 delay(1000)
                 log("Timer: $i")
             }
+            stopSelf()
         }
         /**
          *  - START_STICKY
