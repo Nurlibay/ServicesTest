@@ -59,6 +59,6 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
         android:layout_marginHorizontal="16dp"
-        android:text="Service" />
+        android:text="Work Manager" />
 
 </LinearLayout>

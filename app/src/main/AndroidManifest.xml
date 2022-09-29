@@ -26,9 +26,7 @@
                 android:value="" />
         </activity>
 
-        <service android:name=".MyService"
-            android:exported="false"
-            />
+        <service android:name=".MyService" />
 
     </application>
 
