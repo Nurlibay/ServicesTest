@@ -30,7 +30,7 @@ class MyIntentService: IntentService(NAME) {
         createNotificationChannel()
         startForeground(NOTIFICATION_ID, createNotification())
     }
-
+    
     private fun createNotificationChannel() {
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
