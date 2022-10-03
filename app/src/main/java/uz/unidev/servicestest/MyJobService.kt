@@ -25,7 +25,7 @@ class MyJobService : JobService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             coroutineScope.launch {
                 var workItem = params?.dequeueWork()
-                if (workItem != null) {
+                while (workItem != null) {
                     val page = workItem.intent?.getIntExtra(PAGE, 0)
                     for (i in 0 until 5) {
                         delay(1000)
@@ -34,7 +34,7 @@ class MyJobService : JobService() {
                     params?.completeWork(workItem)
                     workItem = params?.dequeueWork()
                 }
-                jobFinished(params, false)
+                jobFinished(params, true)
             }
         }
         return true

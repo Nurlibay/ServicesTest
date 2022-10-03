@@ -8,6 +8,8 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.work.ExistingWorkPolicy
+import androidx.work.WorkManager
 import uz.unidev.servicestest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -44,7 +46,9 @@ class MainActivity : AppCompatActivity() {
 
             val jobScheduler = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
 
-            //jobScheduler.schedule(jobInfo)
+            /**
+            jobScheduler.schedule(jobInfo)
+             */
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val intent = MyJobService.newIntent(page++)
@@ -52,6 +56,20 @@ class MainActivity : AppCompatActivity() {
             } else {
                 startService(MyIntentService2.newIntent(this, page++))
             }
+        }
+
+        binding.jobIntentService.setOnClickListener {
+            // WAKE_LOOK should add to less than API 26
+            MyJobIntentService.enqueue(this, page++)
+        }
+
+        binding.workManager.setOnClickListener {
+            val workManager = WorkManager.getInstance(applicationContext)
+            workManager.enqueueUniqueWork(
+                MyWorker.WORK_NAME,
+                ExistingWorkPolicy.APPEND,
+                MyWorker.makeRequest(page++)
+            )
         }
     }
 }

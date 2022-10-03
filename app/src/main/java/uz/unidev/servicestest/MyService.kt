@@ -38,7 +38,7 @@ class MyService: Service() {
          *  - START_NOT_STICKY
          *  - START_REDELIVER_INTENT
          */
-        return START_STICKY
+        return START_REDELIVER_INTENT
     }
 
     override fun onDestroy() {
